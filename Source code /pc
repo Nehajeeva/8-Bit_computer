@@ -1,0 +1,28 @@
+`timescale 1ns / 1ps
+module pc (
+    input clk,
+    input reset,
+    input CO,
+    input CE,
+    input CL,
+    input [3:0]bus_in,
+    output[3:0]bus_out
+);
+    reg [3:0] PC;
+    always @(posedge clk or posedge reset) 
+    begin
+        if (reset) 
+        begin
+            PC <= 4'b0000;
+        end
+        else if (CL) 
+        begin
+            PC <= bus_in;
+        end
+        else if (CE) 
+        begin
+            PC <= PC + 4'b0001;
+        end
+    end
+    assign bus_out = PC;
+endmodule
