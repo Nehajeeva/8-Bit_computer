@@ -1,0 +1,19 @@
+`timescale 1ns / 1ps
+module instruction_register (
+    input clk,
+    input reset,
+    input II,
+    input  [7:0]  bus_in,
+    output reg [7:0] IR,
+    output [3:0]  opcode,
+    output [3:0]  operand
+);
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            IR <= 8'b00000000;
+        else if (II)
+            IR <= bus_in;
+    end
+    assign opcode  = IR[7:4];
+    assign operand = IR[3:0];
+endmodule
