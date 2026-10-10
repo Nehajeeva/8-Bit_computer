@@ -1,0 +1,29 @@
+`timescale 1ns / 1ps
+module flag (
+    input wire clk,
+    input wire reset,
+    input wire FL,
+    input wire Z_in,
+    input wire C_in,
+    input wire N_in,
+    input wire V_in,
+    output reg Z,
+    output reg C,
+    output reg N,
+    output reg V
+);
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            Z <= 1'b0;
+            C <= 1'b0;
+            N <= 1'b0;
+            V <= 1'b0;
+        end
+        else if (FL) begin
+            Z <= Z_in;
+            C <= C_in;
+            N <= N_in;
+            V <= V_in;
+        end
+    end
+endmodule
