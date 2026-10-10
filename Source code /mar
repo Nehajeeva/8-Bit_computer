@@ -1,0 +1,18 @@
+`timescale 1ns / 1ps
+module mar (
+    input clk,
+    input reset,
+    input  MI,
+    input  [3:0]bus_in,
+    output [3:0]address
+);
+    reg [3:0] MAR;
+    always @(posedge clk or posedge reset)
+    begin
+        if (reset)
+            MAR <= 4'b0000;
+        else if (MI)
+            MAR <= bus_in;
+    end
+    assign address = MAR;
+endmodule
