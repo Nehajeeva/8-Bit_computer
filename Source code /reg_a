@@ -1,0 +1,18 @@
+timescale 1ns / 1ps
+module register_a (
+    input wire clk,
+    input wire reset,
+    input wire AI,
+    input wire AO,
+    input wire [7:0] bus_in,
+    output wire [7:0] bus_out
+);
+    reg [7:0] A;
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            A <= 8'b00000000;
+        else if (AI)
+            A <= bus_in;
+    end
+    assign bus_out = AO ? A : 8'b00000000;
+endmodule
