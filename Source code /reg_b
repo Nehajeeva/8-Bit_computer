@@ -1,0 +1,17 @@
+`timescale 1ns / 1ps
+module register_b (
+    input wire clk,
+    input wire reset,
+    input wire BI,
+    input wire [7:0] bus_in,
+    output wire [7:0] b_out
+);
+    reg [7:0] B;
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            B <= 8'b00000000;
+        else if (BI)
+            B <= bus_in;
+    end
+    assign b_out = B;
+endmodule
